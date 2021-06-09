@@ -12,5 +12,6 @@ def call(Map config) {
       def systemInfo = client.api().systemApi().systemInfo()
 
       echo "${systemInfo}"
-     }
+    }
+  }
 }
