@@ -1,3 +1,4 @@
+@Grab(group='com.cdancy', module='jenkins-rest', version='0.0.18')
 import com.cdancy.jenkins.rest.JenkinsClient
 
 def call(Map config) {
