@@ -12,7 +12,7 @@ def call(Map config) {
 
       def filename = "test_folder"
 
-      def fileExist = fileExist filename
+      def fileExist = fileExists filename
 
       echo "File ${filename}: ${fileExist}"
 
