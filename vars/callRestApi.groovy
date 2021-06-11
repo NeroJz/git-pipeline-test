@@ -2,6 +2,7 @@
 import com.cdancy.jenkins.rest.JenkinsClient
 
 def call(Map config) {
+  def tenantName = "${config.tenantname}".trim()
   node() {
     stage('Test') {
       echo 'Hello from callRestApi'
@@ -9,6 +10,8 @@ def call(Map config) {
       // stdout = bat(returnStdout: true, script: 'curl -X GET http://127.0.0.1:5000/api/service/hello')
 
       // echo "${stdout.trim()}"
+
+      echo "${tenantName}"
 
       def filename = "test_folder"
 
