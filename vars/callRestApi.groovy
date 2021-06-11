@@ -6,9 +6,15 @@ def call(Map config) {
     stage('Test') {
       echo 'Hello from callRestApi'
 
-      stdout = bat(returnStdout: true, script: 'curl -X GET http://127.0.0.1:5000/api/service/hello')
+      // stdout = bat(returnStdout: true, script: 'curl -X GET http://127.0.0.1:5000/api/service/hello')
 
-      echo "${stdout.trim()}"
+      // echo "${stdout.trim()}"
+
+      def filename = "test_folder"
+
+      def fileExist = fileExist filename
+
+      echo "File ${filename}: ${fileExist}"
 
       // JenkinsClient client = JenkinsClient.builder()
       //   .endPoint("http://127.0.0.1:5000/api/service/hello")
