@@ -3,6 +3,7 @@ import com.cdancy.jenkins.rest.JenkinsClient
 
 def call(Map config) {
   def tenantName = "${config.tenantname}".trim()
+  String[] tenants = tenantName.split(",");
   node() {
     stage('Test') {
       echo 'Hello from callRestApi'
@@ -11,18 +12,13 @@ def call(Map config) {
 
       // echo "${stdout.trim()}"
 
-      echo "${tenantName}"
+      for(String tenant : tenants) {
+        def tenantElement = "${tenant}"
+        echo "Starting Process for Tenant: ${tenantElement}"
 
-      def filename = "test_folder"
+        def existsTenant = fileExists tenantElement
 
-      def fileExist = fileExists filename
-
-      echo "File ${filename}: ${fileExist}"
-
-      if(fileExist) {
-        echo "File exist"
-      } else {
-        echo "File not exist"
+        echo "\t\tFile ${tenantElement}: ${existsTenant}"
       }
 
       // JenkinsClient client = JenkinsClient.builder()
