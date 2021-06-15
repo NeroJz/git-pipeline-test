@@ -19,7 +19,7 @@ def call(Map config) {
         def tenantElement = tenant
         echo "Starting Process for Tenant: ${tenantElement}"
 
-        def exists = fileExists "${tenantElement}"
+        def exists = fileExists tenantElement.toString()
 
         echo "\tFile ${tenantElement}: ${exists.toString()}"
 
