@@ -34,9 +34,12 @@ def call(Map config) {
     }
     stage('Patch') {
       withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', usernameVariable: 'PRTG_USR', passwordVariable: 'PRTG_PWD')]) {
-        echo "${PRTG_USR}"
-        echo "${PRTG_PWD}"
+        echo '$PRTG_USR'
+        echo '$PRTG_PWD'
       }
+
+      echo '$PRTG_USR'
+      echo '$PRTG_PWD'
     }
   }
 }
