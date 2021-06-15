@@ -12,13 +12,15 @@ def call(Map config) {
 
       // echo "${stdout.trim()}"
 
+      sh "ls -l"
+
       for(String tenant : tenants) {
         def tenantElement = "${tenant}"
         echo "Starting Process for Tenant: ${tenantElement}"
 
         def existsTenant = fileExists tenantElement
 
-        echo "\t\tFile ${tenantElement}: ${existsTenant}"
+        echo "\tFile ${tenantElement}: ${existsTenant}"
       }
 
       // JenkinsClient client = JenkinsClient.builder()
