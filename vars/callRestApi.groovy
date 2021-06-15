@@ -25,9 +25,11 @@ def call(Map config) {
 
       }
 
-      def prtg_credentials = credentials('PRTG_CREDENTIAL')
+      PRTG = credentials('PRTG_CREDENTIAL')
 
-      echo "${prtg_credentials}"
+      echo "${PRTG_USR}"
+      echo "${PRTG_PSW}"
+
 
       // JenkinsClient client = JenkinsClient.builder()
       //   .endPoint("http://127.0.0.1:5000/api/service/hello")
