@@ -21,14 +21,9 @@ def call(Map config) {
 
         def folder_path = "./${tenantElement}"
 
-        def existsTenant = fileExists folder_path
+        existsTenant = fileExists folder_path
 
-        // echo "\tFile ${tenantElement}: ${existsTenant}"
-        if(fileExists("${tenantElement}/")) {
-          echo "\tFolder ${tenantElement} existed"
-        } else {
-          echo "\tFolder ${tenantElement} not existed"
-        }
+        echo "\tFile ${tenantElement}: ${tenantElement}"
 
       }
 
