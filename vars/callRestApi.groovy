@@ -36,8 +36,12 @@ def call(Map config) {
       withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', 
         usernameVariable: 'PRTG_USR', 
         passwordVariable: 'PRTG_PWD')]) {
-        echo PRTG_USR
-        echo PRTG_PWD
+        // echo PRTG_USR
+        // echo PRTG_PWD
+
+        def data = "prtg.user=${PRTG_USR}&prtg.password=${PRTG_PWD}"
+
+        echo data
       }
     }
   }
