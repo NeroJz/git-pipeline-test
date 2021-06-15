@@ -23,9 +23,11 @@ def call(Map config) {
 
         echo "\tFile ${tenantElement}: ${exists.toString()}"
 
-        echo "${env.PRTG_CREDENTIAL}"
-
       }
+
+      def prtg_credentials = credentials('PRTG_CREDENTIAL')
+
+      echo "${prtg_credentials}"
 
       // JenkinsClient client = JenkinsClient.builder()
       //   .endPoint("http://127.0.0.1:5000/api/service/hello")
