@@ -23,7 +23,7 @@ def call(Map config) {
 
         existsTenant = fileExists folder_path
 
-        echo "\tFile ${tenantElement}: ${tenantElement}"
+        echo "\tFile ${tenantElement}: ${existsTenant}"
 
       }
 
