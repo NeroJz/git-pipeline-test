@@ -12,7 +12,8 @@ def call(Map config) {
 
       // echo "${stdout.trim()}"
 
-      sh "ls -l"
+      stdout = sh(returnStdout: true, script: "ls -l")
+      echo "${stdout.trim()}"
 
       for(String tenant : tenants) {
         def tenantElement = "${tenant}"
