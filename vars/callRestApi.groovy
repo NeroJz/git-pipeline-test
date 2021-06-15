@@ -16,12 +16,10 @@ def call(Map config) {
       echo "${stdout.trim()}"
 
       for(String tenant : tenants) {
-        def tenantElement = "${tenant}"
+        def tenantElement = tenant
         echo "Starting Process for Tenant: ${tenantElement}"
 
-        def folder_path = "./${tenantElement}"
-
-        def existsTenant = fileExists 'test_folder'
+        def existsTenant = fileExists tenantElement
 
         echo "\tFile ${tenantElement}: ${existsTenant.toString()}"
 
