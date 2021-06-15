@@ -1,10 +1,10 @@
-@Grab(group='com.cdancy', module='jenkins-rest', version='0.0.18')
-import com.cdancy.jenkins.rest.JenkinsClient
-
 def call(Map config) {
   def tenantName = "${config.tenantname}".trim()
   String[] tenants = tenantName.split(",");
   node() {
+    stage('Checkout') {
+      checkout scm
+    }
     stage('Test') {
       echo 'Hello from callRestApi'
 
