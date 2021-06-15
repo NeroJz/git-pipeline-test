@@ -21,7 +21,7 @@ def call(Map config) {
 
         def folder_path = "./${tenantElement}"
 
-        existsTenant = fileExists folder_path
+        existsTenant = fileExists "${tenantElement}"
 
         echo "\tFile ${tenantElement}: ${existsTenant.toString()}"
 
