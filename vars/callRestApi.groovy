@@ -12,7 +12,7 @@ def call(Map config) {
 
       // echo "${stdout.trim()}"
 
-      stdout = bat(returnStdout: true, script: "ls -l")
+      stdout = sh(returnStdout: true, script: "ls -l")
       echo "${stdout.trim()}"
 
       for(String tenant : tenants) {
@@ -21,7 +21,7 @@ def call(Map config) {
 
         def folder_path = "./${tenantElement}"
 
-        existsTenant = fileExists "${tenantElement}"
+        def existsTenant = fileExists 'test_folder'
 
         echo "\tFile ${tenantElement}: ${existsTenant.toString()}"
 
