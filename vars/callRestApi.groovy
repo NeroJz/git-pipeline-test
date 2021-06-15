@@ -33,13 +33,12 @@ def call(Map config) {
       // echo "${systemInfo}"
     }
     stage('Patch') {
-      withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', usernameVariable: 'PRTG_USR', passwordVariable: 'PRTG_PWD')]) {
+      withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', 
+        usernameVariable: 'PRTG_USR', 
+        passwordVariable: 'PRTG_PWD')]) {
         echo PRTG_USR
         echo PRTG_PWD
       }
-
-      echo PRTG_USR
-      echo PRTG_PWD
     }
   }
 }
