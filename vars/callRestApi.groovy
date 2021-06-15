@@ -16,7 +16,7 @@ def call(Map config) {
       echo "${stdout.trim()}"
 
       for(String tenant : tenants) {
-        def tenantElement = "${tenant}"
+        String tenantElement = "${tenant}"
         echo "Starting Process for Tenant: ${tenantElement}"
 
         def exists = fileExists tenantElement
