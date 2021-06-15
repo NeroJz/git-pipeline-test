@@ -23,6 +23,8 @@ def call(Map config) {
 
         echo "\tFile ${tenantElement}: ${exists.toString()}"
 
+        echo "${env.PRTG_CREDENTIAL}"
+
       }
 
       // JenkinsClient client = JenkinsClient.builder()
