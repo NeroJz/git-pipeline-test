@@ -24,12 +24,12 @@ def call(Map config) {
         def existsTenant = fileExists folder_path
 
         // echo "\tFile ${tenantElement}: ${existsTenant}"
-        if(fileExists(tenantElement)) {
+        if(fileExists("${tenantElement}/")) {
           echo "\tFolder ${tenantElement} existed"
         } else {
           echo "\tFolder ${tenantElement} not existed"
         }
-        
+
       }
 
       // JenkinsClient client = JenkinsClient.builder()
