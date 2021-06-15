@@ -12,7 +12,7 @@ def call(Map config) {
 
       // echo "${stdout.trim()}"
 
-      stdout = sh(returnStdout: true, script: "ls -l")
+      stdout = bat(returnStdout: true, script: "ls -l")
       echo "${stdout.trim()}"
 
       for(String tenant : tenants) {
