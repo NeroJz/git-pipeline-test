@@ -5,7 +5,7 @@ def call(Map config) {
     stage('Checkout') {
       checkout scm
     }
-    stage('Test') {
+    stage('Test Directory') {
       echo 'Hello from callRestApi'
 
       // stdout = bat(returnStdout: true, script: 'curl -X GET http://127.0.0.1:5000/api/service/hello')
@@ -24,13 +24,6 @@ def call(Map config) {
         echo "\tFile ${tenantElement}: ${exists.toString()}"
 
       }
-
-      PRTG = credentials('PRTG_CREDENTIAL')
-
-      echo "${PRTG_USR}"
-      echo "${PRTG_PSW}"
-
-
       // JenkinsClient client = JenkinsClient.builder()
       //   .endPoint("http://127.0.0.1:5000/api/service/hello")
       //   .build()
@@ -38,6 +31,12 @@ def call(Map config) {
       // def systemInfo = client.api().systemApi().systemInfo()
 
       // echo "${systemInfo}"
+    }
+    stage('Patch') {
+      withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', usernameVariable: 'PRTG_USR', passwordVariable: 'PRTG_PWD')]) {
+        echo "${PRTG_USR}"
+        echo "${PRTG_PWD}"
+      }
     }
   }
 }
