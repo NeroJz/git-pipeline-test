@@ -32,7 +32,7 @@ def call(Map config) {
 
         echo 'callRestApi'
 
-        def command = "curl -d '${data}' -X POST http://0.0.0.0:5000/api/service/hello"
+        def command = "curl -d '${data}' -X POST http://host.docker.internal/api/service/hello"
 
         echo command
         
