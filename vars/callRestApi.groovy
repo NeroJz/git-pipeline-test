@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurperClassic
+
 def call(Map config) {
   def tenantName = "${config.tenantname}".trim()
   String[] tenants = tenantName.split(",");
@@ -34,7 +36,7 @@ def call(Map config) {
           
           def stdout = sh(returnStdout: true, script: command)
 
-          def jsonObj = readJSON text: stdout.trim()
+          def jsonObj = new JsonSlurperClassic().parseText(stdout.trim())
 
           assert jsonObj['status'] == true
 
