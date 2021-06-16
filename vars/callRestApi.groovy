@@ -6,12 +6,6 @@ def call(Map config) {
       checkout scm
     }
     stage('Test Directory') {
-      echo 'Hello from callRestApi'
-
-      // stdout = bat(returnStdout: true, script: 'curl -X GET http://127.0.0.1:5000/api/service/hello')
-
-      // echo "${stdout.trim()}"
-
       stdout = sh(returnStdout: true, script: "ls -l")
       echo "${stdout.trim()}"
 
@@ -24,13 +18,6 @@ def call(Map config) {
         echo "\tFile ${tenantElement}: ${exists.toString()}"
 
       }
-      // JenkinsClient client = JenkinsClient.builder()
-      //   .endPoint("http://127.0.0.1:5000/api/service/hello")
-      //   .build()
-      
-      // def systemInfo = client.api().systemApi().systemInfo()
-
-      // echo "${systemInfo}"
     }
     stage('Patch') {
       withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', 
@@ -42,6 +29,16 @@ def call(Map config) {
         def data = "prtg.user=${PRTG_USR}&prtg.password=${PRTG_PWD}"
 
         echo data
+
+        echo 'callRestApi'
+
+        def command = "curl -d ${data} -X POST http://127.0.0.1:5000/api/service/hello"
+
+        echo command
+        
+        def stdout = sh(returnStdout: true, script: command)
+
+        echo "${stdout.trim()}"
       }
     }
   }
