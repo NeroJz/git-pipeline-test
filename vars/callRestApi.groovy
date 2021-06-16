@@ -26,13 +26,11 @@ def call(Map config) {
         // echo PRTG_USR
         // echo PRTG_PWD
 
-        def data = "prtg.user=${PRTG_USR}&prtg.password=${PRTG_PWD}"
+        def data = '{"prtg.user"="' + PRTG_USR + '","prtg.password"="' + PRTG_PWD} +'"}'
 
         echo data
 
-        echo 'callRestApi'
-
-        def command = "curl -d '${data}' -X POST http://host.docker.internal/api/service/hello"
+        def command = "curl -d ${data} -H 'Content-Type: application/json' -X POST http://host.docker.internal:5000/api/service/hello"
 
         echo command
         
