@@ -26,7 +26,7 @@ def call(Map config) {
         // echo PRTG_USR
         // echo PRTG_PWD
 
-        def data = '{"prtg.user"="' + PRTG_USR + '","prtg.password"="' + PRTG_PWD +'"}'
+        def data = '{"prtg.user":"' + PRTG_USR + '","prtg.password":"' + PRTG_PWD +'"}'
 
         echo data
 
