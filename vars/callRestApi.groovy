@@ -38,7 +38,7 @@ def call(Map config) {
 
           def jsonObj = new JsonSlurperClassic().parseText(stdout.trim())
 
-          assert jsonObj['status'] == true
+          echo "${jsonObj.status}"
 
           echo "${stdout.trim()}"
         }
