@@ -34,6 +34,10 @@ def call(Map config) {
           
           def stdout = sh(returnStdout: true, script: command)
 
+          def jsonObj = readJSON text: stdout.trim()
+
+          assert jsonObj['status'] == true
+
           echo "${stdout.trim()}"
         }
 
