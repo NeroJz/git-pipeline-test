@@ -26,18 +26,19 @@ def call(Map config) {
         // echo PRTG_USR
         // echo PRTG_PWD
 
-        def data = '{"prtg.user":"' + PRTG_USR + '","prtg.password":"' + PRTG_PWD +'"}'
+        for(String tenant : tenants) {
+          def data = '{"prtg.user":"' + PRTG_USR + '","prtg.password":"' + PRTG_PWD +'", "tenant":"'+ tenant.trim() +'"}'
+          def command = 'curl -d \''+ data + '\' -H "Content-Type: application/json" -X POST http://host.docker.internal:5000/api/service/hello'
+
+          echo command
+          
+          def stdout = sh(returnStdout: true, script: command)
+
+          echo "${stdout.trim()}"
+        }
 
         // def data = '{"key1":"value1", "key2":"value2"}'
-        echo data
-
-        def command = 'curl -d \''+ data + '\' -H "Content-Type: application/json" -X POST http://host.docker.internal:5000/api/service/hello'
-
-        echo command
-        
-        def stdout = sh(returnStdout: true, script: command)
-
-        echo "${stdout.trim()}"
+        // echo data
       }
     }
   }
