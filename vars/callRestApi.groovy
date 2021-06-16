@@ -28,7 +28,7 @@ def call(Map config) {
 
         // def data = '{"prtg.user":"' + PRTG_USR + '","prtg.password":"' + PRTG_PWD +'"}'
 
-        def data = "{\"user\":\"Test User\",\"password\":\"Abc12345\"}"
+        def data = '{"key1":"value1", "key2":"value2"}'
         echo data
 
         def command = "curl -d ${data} -H 'Content-Type: application/json' -X POST http://host.docker.internal:5000/api/service/hello"
