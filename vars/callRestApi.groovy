@@ -12,7 +12,7 @@ def call(Map config) {
       echo "${stdout.trim()}"
 
       for(String tenant : tenants) {
-        String tenantElement = "${tenant.trim()}"
+        String tenantElement = "${tenant}"
         echo "Starting Process for Tenant: ${tenantElement}"
 
         def exists = fileExists tenantElement
@@ -21,31 +21,28 @@ def call(Map config) {
 
       }
     }
-    stage('Patch') {
-      withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', 
-        usernameVariable: 'PRTG_USR', 
-        passwordVariable: 'PRTG_PWD')]) {
-        // echo PRTG_USR
-        // echo PRTG_PWD
+    // stage('Patch') {
+    //   withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', 
+    //     usernameVariable: 'PRTG_USR', 
+    //     passwordVariable: 'PRTG_PWD')]) {
+    //     // echo PRTG_USR
+    //     // echo PRTG_PWD
 
-        for(String tenant : tenants) {
-          def data = '{"prtg.user":"' + PRTG_USR + '","prtg.password":"' + PRTG_PWD +'", "tenant":"'+ tenant.trim() +'"}'
-          def command = 'curl -d \''+ data + '\' -H "Content-Type: application/json" -X POST http://host.docker.internal:5000/api/service/hello'
+    //     for(String tenant : tenants) {
+    //       def data = '{"prtg.user":"' + PRTG_USR + '","prtg.password":"' + PRTG_PWD +'", "tenant":"'+ tenant.trim() +'"}'
+    //       def command = 'curl -d \''+ data + '\' -H "Content-Type: application/json" -X POST http://host.docker.internal:5000/api/service/hello'
 
-          echo command
+    //       echo command
           
-          def stdout = sh(returnStdout: true, script: command)
+    //       def stdout = sh(returnStdout: true, script: command)
 
-          def jsonObj = new JsonSlurperClassic().parseText(stdout.trim())
+    //       def jsonObj = new JsonSlurperClassic().parseText(stdout.trim())
 
-          echo "${jsonObj.status}"
+    //       echo "${jsonObj.status}"
 
-          echo "${stdout.trim()}"
-        }
-
-        // def data = '{"key1":"value1", "key2":"value2"}'
-        // echo data
-      }
-    }
+    //       echo "${stdout.trim()}"
+    //     }
+    //   }
+    // }
   }
 }
