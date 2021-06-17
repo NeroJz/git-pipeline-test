@@ -53,6 +53,17 @@ def call(Map config) {
 
 
 def checkTenantFolderExists(String tenant) {
-  echo "${tenant} - checkTenantFolderExists"
-  return true;
+  String[] envs = ['-dev', '-intg']
+
+  for(String pattern : envs) {
+    def folder_name = tenant.minus(pattern)
+
+    def folderExist = fileExists folder_name.trim()
+
+    if(folderExist) {
+      return true
+    }
+  }
+  
+  return false
 }
