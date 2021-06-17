@@ -15,6 +15,10 @@ def call(Map config) {
         String tenantElement = "${tenant}"
         echo "Starting Process for Tenant: ${tenantElement}"
 
+        def checkTenantExisted = checkTenantFolderExists(tenantElement)
+
+        echo "\tcheckTenantExisted ---> ${checkTenantExisted}"
+
         def exists = fileExists tenantElement
 
         echo "\tFile ${tenantElement}: ${exists.toString()}"
@@ -45,4 +49,10 @@ def call(Map config) {
     //   }
     // }
   }
+}
+
+
+def checkTenantFolderExists(String tenant) {
+  echo "${tenant} - checkTenantFolderExists"
+  return true;
 }
