@@ -17,7 +17,7 @@ def call(Map config) {
 
         def replacedTenant = getReplacedTenantName(tenantElement)
 
-        echo "\getReplacedTenantName ---> ${replacedTenant}"
+        echo "\tgetReplacedTenantName ---> ${replacedTenant}"
 
         def exists = fileExists replacedTenant
 
