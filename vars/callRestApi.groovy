@@ -15,11 +15,11 @@ def call(Map config) {
         String tenantElement = "${tenant}"
         echo "Starting Process for Tenant: ${tenantElement}"
 
-        def checkTenantExisted = checkTenantFolderExists(tenantElement)
+        def replacedTenant = getReplacedTenantName(tenantElement)
 
-        echo "\tcheckTenantExisted ---> ${checkTenantExisted}"
+        echo "\getReplacedTenantName ---> ${replacedTenant}"
 
-        def exists = fileExists tenantElement
+        def exists = fileExists replacedTenant
 
         echo "\tFile ${tenantElement}: ${exists.toString()}"
 
@@ -52,18 +52,22 @@ def call(Map config) {
 }
 
 
-def checkTenantFolderExists(String tenant) {
-  String[] envs = ['-dev', '-intg']
+def getReplacedTenantName(String tenant) {
+  // String[] envs = ['-dev', '-intg']
 
-  for(String pattern : envs) {
-    def folder_name = tenant.minus(pattern)
+  // for(String pattern : envs) {
+  //   def folder_name = tenant.minus(pattern)
 
-    def folderExist = fileExists folder_name.trim()
+  //   def folderExist = fileExists folder_name.trim()
 
-    if(folderExist) {
-      return true
-    }
-  }
-  
-  return false
+  //   if(folderExist) {
+  //     return folder_name
+  //   }
+  // }
+
+  // return ""
+
+  def replacedTenant = tenant.trim().replaceAll(/(-dev|-intg)/, "")
+
+  return replacedTenant
 }
