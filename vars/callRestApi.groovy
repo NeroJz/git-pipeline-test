@@ -6,6 +6,15 @@ def call(Map config) {
   node() {
     stage('Checkout') {
       checkout scm
+
+      sh '''
+        pwd;ls -l
+        Pattern='project": "projects/'
+        grep -F "${Pattern}" ./angular.json |awk -F "/" {'print $2'} > ./list.txt
+        cat ./list.txt
+        mkdir ./projects
+        echo 'Checkout started for Projects'
+      '''
     }
     stage('Test Directory') {
       stdout = sh(returnStdout: true, script: "ls -l")
