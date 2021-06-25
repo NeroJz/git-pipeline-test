@@ -8,14 +8,14 @@ def call(Closure config) {
     stage('Checkout') {
       checkout scm
 
-      sh '''
-        pwd;ls -l
-        Pattern='project": "projects/'
-        grep -F "${Pattern}" ./angular.json |awk -F "/" {'print $2'} > ./list.txt
-        cat ./list.txt
-        mkdir ./projects
-        echo 'Checkout started for Projects'
-      '''
+      // sh '''
+      //   pwd;ls -l
+      //   Pattern='project": "projects/'
+      //   grep -F "${Pattern}" ./angular.json |awk -F "/" {'print $2'} > ./list.txt
+      //   cat ./list.txt
+      //   mkdir ./projects
+      //   echo 'Checkout started for Projects'
+      // '''
     }
     stage('Test Tenantname Based on Job Name') {
       echo "$env.JOB_NAME"
