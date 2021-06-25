@@ -16,24 +16,27 @@ def call(Map config) {
         echo 'Checkout started for Projects'
       '''
     }
-    stage('Test Directory') {
-      stdout = sh(returnStdout: true, script: "ls -l")
-      echo "${stdout.trim()}"
-
-      for(String tenant : tenants) {
-        String tenantElement = "${tenant}"
-        echo "Starting Process for Tenant: ${tenantElement}"
-
-        def replacedTenant = getReplacedTenantName(tenantElement)
-
-        echo "\tgetReplacedTenantName ---> ${replacedTenant}"
-
-        def exists = fileExists replacedTenant
-
-        echo "\tFile ${tenantElement}: ${exists.toString()}"
-
-      }
+    stage('Test Tenantname Based on Job Name') {
+      echo "$env.JOB_NAME"
     }
+    // stage('Test Directory') {
+    //   stdout = sh(returnStdout: true, script: "ls -l")
+    //   echo "${stdout.trim()}"
+
+    //   for(String tenant : tenants) {
+    //     String tenantElement = "${tenant}"
+    //     echo "Starting Process for Tenant: ${tenantElement}"
+
+    //     def replacedTenant = getReplacedTenantName(tenantElement)
+
+    //     echo "\tgetReplacedTenantName ---> ${replacedTenant}"
+
+    //     def exists = fileExists replacedTenant
+
+    //     echo "\tFile ${tenantElement}: ${exists.toString()}"
+
+    //   }
+    // }
     // stage('Patch') {
     //   withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', 
     //     usernameVariable: 'PRTG_USR', 
