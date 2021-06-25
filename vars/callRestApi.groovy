@@ -13,12 +13,13 @@ def call(Closure body) {
   if(jobName.endsWith('dev')) {
     tenantName = "${config.tenantname_dev}".trim()
     tenants = tenantName.split(",");
-  } else if(jobName.endsWith('intg') && config.tenantname_intg) {
+  } else if(jobName.endsWith('intg') && config.tenantname_intg?.trim() != "") {
+    echo "\tInside Intg job"
     tenantName = "${config.tenantname_intg}".trim()
     tenants = tenantName.split(",");
   }
 
-  echo "${tenants.toString()}"
+  echo "Tenants: ${tenants.toString()}"
 
   node() {
     stage('Checkout') {
