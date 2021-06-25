@@ -10,7 +10,7 @@ def call(Closure config) {
   if(jobName.endsWith('dev')) {
     tenantName = "${config.tenantname_dev}".trim()
     tenants = tenantName.split(",");
-  } else if(jobName.endsWith('intg')) {
+  } else if(jobName.endsWith('intg') && config.tenantname_intg != null) {
     tenantName = "${config.tenantname_intg}".trim()
     tenants = tenantName.split(",");
   }
