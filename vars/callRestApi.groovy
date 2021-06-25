@@ -8,11 +8,11 @@ def call(Closure config) {
   def jobName = "${env.JOB_NAME}".replace('%2F', '_')
 
   if(jobName.endsWith('dev')) {
-    def tenantName = "${config.tenantname_dev}".trim()
-    String[] tenants = tenantName.split(",");
+    tenantName = "${config.tenantname_dev}".trim()
+    tenants = tenantName.split(",");
   } else if(jobName.endsWith('intg')) {
-    def tenantName = "${config.tenantname_intg}".trim()
-    String[] tenants = tenantName.split(",");
+    tenantName = "${config.tenantname_intg}".trim()
+    tenants = tenantName.split(",");
   }
 
   echo "${tenants.toString()}"
