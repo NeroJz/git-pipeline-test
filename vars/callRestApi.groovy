@@ -4,6 +4,19 @@ def call(Closure config) {
   config()
   def tenantName = "${config.tenantname_dev}".trim()
   String[] tenants = tenantName.split(",");
+
+  def jobName = "${env.JOB_NAME}".replace('%2F', '_')
+
+  if(jobName.endsWith('dev')) {
+    def tenantName = "${config.tenantname_dev}".trim()
+    String[] tenants = tenantName.split(",");
+  } else if(jobName.endsWith('intg')) {
+    def tenantName = "${config.tenantname_intg}".trim()
+    String[] tenants = tenantName.split(",");
+  }
+
+  echo "${tenants.toString()}"
+
   node() {
     stage('Checkout') {
       checkout scm
