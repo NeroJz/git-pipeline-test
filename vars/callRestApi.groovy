@@ -10,10 +10,12 @@ def call(Closure body) {
 
   def jobName = "${env.JOB_NAME}".replace('%2F', '_')
 
+  echo "Config: ${config.tenantname_intg?.trim()}"
+
   if(jobName.endsWith('dev')) {
     tenantName = "${config.tenantname_dev}".trim()
     tenants = tenantName.split(",");
-  } else if(jobName.endsWith('intg') && config.tenantname_intg?.trim() != "") {
+  } else if(jobName.endsWith('intg') && !config.tenantname_intg?.isEmpty()) {
     echo "\tInside Intg job"
     tenantName = "${config.tenantname_intg}".trim()
     tenants = tenantName.split(",");
