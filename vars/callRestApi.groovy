@@ -1,7 +1,10 @@
 import groovy.json.JsonSlurperClassic
 
-def call(Closure config) {
-  config()
+def call(Closure body) {
+  def config = [:]
+  body.delegate = config
+  body()
+
   def tenantName = "${config.tenantname_dev}".trim()
   String[] tenants = tenantName.split(",");
 
