@@ -1,6 +1,7 @@
 import groovy.json.JsonSlurperClassic
 
-def call(Map config) {
+def call(Closure config) {
+  config()
   def tenantName = "${config.tenantname_dev}".trim()
   String[] tenants = tenantName.split(",");
   node() {
