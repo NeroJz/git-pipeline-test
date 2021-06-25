@@ -11,8 +11,11 @@ def call(Closure body) {
   def jobName = "${env.JOB_NAME}".replace('%2F', '_')
 
   echo "Config: ${config.tenantname_intg?.trim()}"
+  echo "Before condition"
+  echo "Tenants: ${tenants.toString()}"
 
   if(jobName.endsWith('dev')) {
+    echo "\tInside Dev job"
     tenantName = "${config.tenantname_dev}".trim()
     tenants = tenantName.split(",");
   } else if(jobName.endsWith('intg') && config.tenantname_intg != null) {
@@ -21,6 +24,7 @@ def call(Closure body) {
     tenants = tenantName.split(",");
   }
 
+  echo "After condition"
   echo "Tenants: ${tenants.toString()}"
 
   node() {
