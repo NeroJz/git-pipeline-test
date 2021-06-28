@@ -29,6 +29,8 @@ def call(Closure body) {
     tenants = tenantName.split(",");
   }
 
+  echo "$tenantName"
+
   echo "After condition"
   echo "Tenants: ${tenants.toString()}"
 
