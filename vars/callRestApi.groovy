@@ -43,6 +43,8 @@ def call(Closure body) {
         currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
       }
 
+      echo "Processing Checkout"
+
       // sh '''
       //   pwd;ls -l
       //   Pattern='project": "projects/'
@@ -57,12 +59,16 @@ def call(Closure body) {
         echo 'Step 2 Tenant name is empty. Skip the rest of the pipeline.'
         currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
       }
+
+      echo "Processing Step 2"
     }
     stage('Step 3') {
       if(tenantName == 'null') {
         echo 'Step 3 Tenant name is empty. Skip the rest of the pipeline.'
         currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
       }
+
+      echo "Processing Step 3"
     }
     stage('Test Tenantname Based on Job Name') {
       echo "$env.JOB_NAME"
