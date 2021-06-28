@@ -41,6 +41,7 @@ def call(Closure body) {
       if(tenantName == 'null') {
         echo 'Tenant name is empty. Skip the rest of the pipeline.'
         currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+        return
       }
 
       echo "Processing Checkout"
@@ -58,6 +59,7 @@ def call(Closure body) {
       if(tenantName == 'null') {
         echo 'Step 2 Tenant name is empty. Skip the rest of the pipeline.'
         currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+        return
       }
 
       echo "Processing Step 2"
@@ -66,6 +68,7 @@ def call(Closure body) {
       if(tenantName == 'null') {
         echo 'Step 3 Tenant name is empty. Skip the rest of the pipeline.'
         currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+        return
       }
 
       echo "Processing Step 3"
