@@ -6,9 +6,9 @@ def call(Closure body) {
   body.delegate = config
   body()
 
-  if(config.tenantname_dev == null) {
-    error 'Error: tenantname_dev must be provided from Jenkins!'
-  }
+  // if(config.tenantname_dev == null) {
+  //   error 'Error: tenantname_dev must be provided from Jenkins!'
+  // }
   
   def tenantName = "${config.tenantname_dev}".trim()
   String[] tenants = tenantName.split(",");
