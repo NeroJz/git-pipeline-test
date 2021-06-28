@@ -1,6 +1,6 @@
 import groovy.json.JsonSlurperClassic
 
-def Closure stopBuild {
+def Closure stopBuild() {
   currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
   return
 }
