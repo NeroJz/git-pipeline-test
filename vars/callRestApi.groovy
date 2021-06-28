@@ -1,5 +1,10 @@
 import groovy.json.JsonSlurperClassic
 
+def stopBuild() {
+  currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+  return
+}
+
 def call(Closure body) {
   def config = [:]
   body.resolveStrategy = Closure.DELEGATE_FIRST
@@ -40,8 +45,7 @@ def call(Closure body) {
 
       if(tenantName == 'null') {
         echo 'Tenant name is empty. Skip the rest of the pipeline.'
-        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-        return
+        stopBuild()
       }
 
       echo "Processing Checkout"
@@ -58,8 +62,7 @@ def call(Closure body) {
     stage('Step 2') {
       if(tenantName == 'null') {
         echo 'Step 2 Tenant name is empty. Skip the rest of the pipeline.'
-        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-        return
+        stopBuild()
       }
 
       echo "Processing Step 2"
@@ -67,8 +70,7 @@ def call(Closure body) {
     stage('Step 3') {
       if(tenantName == 'null') {
         echo 'Step 3 Tenant name is empty. Skip the rest of the pipeline.'
-        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-        return
+        stopBuild()
       }
 
       echo "Processing Step 3"
