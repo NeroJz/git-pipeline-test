@@ -38,6 +38,11 @@ def call(Closure body) {
     stage('Checkout') {
       checkout scm
 
+      if(tenantName == 'null') {
+        echo 'Tenant name is empty. Skip the rest of the pipeline.'
+        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+      }
+
       // sh '''
       //   pwd;ls -l
       //   Pattern='project": "projects/'
@@ -46,6 +51,18 @@ def call(Closure body) {
       //   mkdir ./projects
       //   echo 'Checkout started for Projects'
       // '''
+    }
+    stage('Step 2') {
+      if(tenantName == 'null') {
+        echo 'Step 2 Tenant name is empty. Skip the rest of the pipeline.'
+        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+      }
+    }
+    stage('Step 3') {
+      if(tenantName == 'null') {
+        echo 'Step 3 Tenant name is empty. Skip the rest of the pipeline.'
+        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+      }
     }
     stage('Test Tenantname Based on Job Name') {
       echo "$env.JOB_NAME"
