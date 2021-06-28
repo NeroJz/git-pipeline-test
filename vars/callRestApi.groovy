@@ -29,7 +29,7 @@ def call(Closure body) {
     tenants = tenantName.split(",");
   }
 
-  echo "IS NULL: ${tenantName == null}"
+  echo "IS NULL: ${tenantName == 'null'}"
 
   echo "After condition"
   echo "Tenants: ${tenants.toString()}"
