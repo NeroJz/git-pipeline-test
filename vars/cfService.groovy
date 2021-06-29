@@ -42,9 +42,7 @@ def call(Closure body) {
             jsonContents.xsappname = envAwareValue
             jsonReset.xsappname = envResetValue
 
-            def stdout = sh(returnStdout: true, script: "cat $jsonContents")
-
-            echo "$stdout"
+            echo "$jsonContents"
 
             writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
             writeJSON(file: envResetJsonfile, json: jsonReset, pretty: 4)
