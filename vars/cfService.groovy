@@ -23,9 +23,19 @@ def call(Closure body) {
 
           echo "The json filename: ${jsonFileName}"
 
-          def jsonContentsReset = readJSON file:jsonFileName
+          script {
+            echo "Starting function to generate security reset json"
+            createResetJson("${jsonFileName}") //function call for creating reset json
+            def jsonContents = readJSON file: jsonFileName
+            def jsonReset = readJSON file: jsonResetName
 
-          echo "${jsonContentsReset}"
+            def nonEnvAwareValue = jsonContents.xsappname
+            def nonEnvResetValue = jsonReset.xsappname
+
+            echo "${nonEnvAwareValue}"
+            echo "\n"
+            echo "${nonEnvResetValue}"
+          }
         }
       }
     }
