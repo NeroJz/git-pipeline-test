@@ -41,13 +41,18 @@ def call(Closure body) {
             echo "Updated environment aware xsappname: ${envAwareValue}"
             jsonContents.xsappname = envAwareValue
             jsonReset.xsappname = envResetValue
+
+            stdout = sh(returnStdout: true, script: "cat $jsonContents")
+
+            echo "$stdout"
+
             writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
             writeJSON(file: envResetJsonfile, json: jsonReset, pretty: 4)
 
             echo "Content: xs-security-env.json\n"
             sh 'cat xs-security-env.json'
-            echo "\nContent: xsSecurityReset.json\n"
-            sh 'cat xsSecurityReset.json'
+            // echo "\nContent: xsSecurityReset.json\n"
+            // sh 'cat xsSecurityReset.json'
           }
         }
       }
@@ -64,7 +69,7 @@ def createResetJson (jsonFileName){
           def jsonStr = JsonOutput.prettyPrint(JsonOutput.toJson(jsonContentsReset))
           writeFile(file: 'xsSecurityReset.json', text: jsonStr)
 
-          sh 'cat xsSecurityReset.json'
+          // sh 'cat xsSecurityReset.json'
       }
       else {
           throw new Exception("Build failed as role-collections not found under ${jsonFileName}")
