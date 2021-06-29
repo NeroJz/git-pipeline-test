@@ -253,6 +253,7 @@ import groovy.json.*
         }
     }
   }
+}
 
 def createResetJson(jsonFileName) {
 
