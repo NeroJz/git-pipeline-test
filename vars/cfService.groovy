@@ -9,7 +9,7 @@ import groovy.json.*
 
     pipeline {
       agent {
-        label 'nodejs10x'
+        any
       }
       options {
         skipDefaultCheckout()
