@@ -45,15 +45,15 @@ import groovy.json.*
         intgTags = ""
         qaTags = ""
         demoTags = ""
-
-        envAwareValue = ""
-        envResetValue = ""
       }
 
       stages {
 
         stage('Checkout') {
           steps {
+
+            def envAwareValue  = ""
+            def envResetValue = ""
 
             // Hardcoded for xsuaa services                    
             echo "Starting Job with parameters: ${serviceName} ${servicePlan} ${serviceInstanceName} ${jsonFileName}"
