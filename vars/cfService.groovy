@@ -45,6 +45,9 @@ import groovy.json.*
         intgTags = ""
         qaTags = ""
         demoTags = ""
+
+        envAwareValue = ""
+        envResetValue = ""
       }
 
       stages {
