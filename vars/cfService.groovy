@@ -199,16 +199,14 @@ import groovy.json.*
 
               sh "ls -l"
 
-              // echo "Start writing JSON file: ${envAwareJsonFile}\n"
-              // writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
+              echo "Start writing JSON file: ${envAwareJsonFile}\n"
+              writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
 
               echo "Start writing JSON file: ${envResetJsonfile}\n"
               writeJSON(file: envResetJsonfile, json: jsonReset, pretty: 4)
 
-              // sh 'cat xs-security-env.json'
+              sh 'cat xs-security-env.json'
               sh 'cat xsSecurityReset.json'
-
-              error 'FORCE: Stop the job'
 
               if (jobName.endsWith('dev')) {
 
