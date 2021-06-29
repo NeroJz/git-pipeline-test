@@ -8,9 +8,7 @@ import groovy.json.*
     body()
 
     pipeline {
-      agent {
-        any
-      }
+      agent any
       options {
         skipDefaultCheckout()
       }
