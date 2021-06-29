@@ -20,38 +20,43 @@ def call(Closure body) {
     stages {
       stage('Checkout') {
         steps {
-          echo "Starting function to clone repository"
-
-          checkout scm
-
-          echo "The json filename: ${jsonFileName}"
-
+          
           script {
-            echo "Starting function to generate security reset json"
+            echo "Starting function to clone repository"
+
+            echo "Starting function to generate security reset jason"
             createResetJson("${jsonFileName}") //function call for creating reset json
             def jsonContents = readJSON file: jsonFileName
             def jsonReset = readJSON file: jsonResetName
-
             def nonEnvAwareValue = jsonContents.xsappname
             def nonEnvResetValue = jsonReset.xsappname
+
+            if(jsonContents.has('role-collections')) {
+              def RoleCollecArray = jsonContents.'role-collections'.name
+							def countlist=RoleCollecArray.size()
+
+              for (j=0 ; j< countlist;j++){
+                jsonContents.'role-collections'[j].name =RoleCollecArray[j] +"-dev"
+              }
+            } else {
+              echo "Role -Collections not found"
+            }
 
             envAwareValue = nonEnvAwareValue +"-dev"
             envResetValue = nonEnvResetValue +"-dev"
 
             echo "Updated environment aware xsappname: ${envAwareValue}"
+                                                    
             jsonContents.xsappname = envAwareValue
             jsonReset.xsappname = envResetValue
 
-            echo "$jsonContents"
-
+            echo "Start writing JSON file: ${envAwareJsonFile}\n"
             writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
-            writeJSON(file: envResetJsonfile, json: jsonReset, pretty: 4)
 
-            echo "Content: xs-security-env.json\n"
-            sh 'cat xs-security-env.json'
-            // echo "\nContent: xsSecurityReset.json\n"
-            // sh 'cat xsSecurityReset.json'
+            echo "Start writing JSON file: ${envResetJsonfile}\n"
+            writeJSON(file: envResetJsonfile, json: jsonReset, pretty: 4)
           }
+
         }
       }
     }
