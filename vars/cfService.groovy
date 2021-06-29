@@ -59,7 +59,7 @@ import groovy.json.*
 
             script {
               echo "Starting function to clone repository"
-              def promoteIntg = new com.accenture.newspage.PromoteIntg();
+              // def promoteIntg = new com.accenture.newspage.PromoteIntg();
               if (DEPLOY_ENV == "dev") {
                 checkout scm
               }
@@ -79,7 +79,7 @@ import groovy.json.*
                   echo "Commit Hash Specified : ${specifiedTarget}"
                   cloneRepository(scmUrl, specifiedTarget)
                   echo "Checking to see if the last Dev Build was successful to promote intg"
-                  promoteIntg.validateBuildStatus(jobName, "${env.JENKINS_API_URL}", "${JENKINS_API_CRED_USR}", "${JENKINS_API_CRED_PSW}", "${scmUrl}", "${specifiedTarget}", this)
+                  // promoteIntg.validateBuildStatus(jobName, "${env.JENKINS_API_URL}", "${JENKINS_API_CRED_USR}", "${JENKINS_API_CRED_PSW}", "${scmUrl}", "${specifiedTarget}", this)
                 }
               }
 
