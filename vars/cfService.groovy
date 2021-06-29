@@ -6,9 +6,7 @@ def call(Closure body) {
   body()
 
   pipeline {
-    agent {
-      label 'nodejs10x'
-    }
+    agent any
     stages {
       stage('Checkout') {
         steps {
