@@ -24,7 +24,7 @@ def call(Closure body) {
           echo "The json filename: ${jsonFileName}"
 
           script {
-            echo "Starting function to generate security reset jason"
+            echo "Starting function to generate security reset json"
             createResetJson("${jsonFileName}") //function call for creating reset json
             def jsonContents = readJSON file: jsonFileName
             def jsonReset = readJSON file: jsonResetName
@@ -43,8 +43,8 @@ def call(Closure body) {
 }
 
 def createResetJson (jsonFileName){
-
   script{
+    sh 'ls -l'
       def jsonContentsReset = readJSON file: jsonFileName
       if (jsonContentsReset.has('role-collections')){
           jsonContentsReset.remove('role-collections')
