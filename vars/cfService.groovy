@@ -29,8 +29,6 @@ import groovy.json.*
         startingextDemoTag = "0.1.0-extDemo"
 
         scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
-        // JENKINS_API_CRED = credentials('JENKINS_API')
-        // CF_BUILD = credentials('CF_BUILD')
 
         envAwareJsonFile = "xs-security-env.json"
         envResetJsonfile = "xsSecurityReset.json"
@@ -38,10 +36,6 @@ import groovy.json.*
 
         // Hard coded for now
         envAwareIdentifier = "xsappname"
-
-        cfApi = "${env.CF2_API}"
-        cfOrg = "${env.CF_DEV_ORG}"
-        cfSpace = "${env.CF2_DEV_SPACE}"
         intgTags = ""
         qaTags = ""
         demoTags = ""
@@ -51,9 +45,6 @@ import groovy.json.*
 
         stage('Checkout') {
           steps {
-
-            def envAwareValue  = ""
-            def envResetValue = ""
 
             // Hardcoded for xsuaa services                    
             echo "Starting Job with parameters: ${serviceName} ${servicePlan} ${serviceInstanceName} ${jsonFileName}"
@@ -208,14 +199,16 @@ import groovy.json.*
 
               sh "ls -l"
 
-              echo "Start writing JSON file: ${envAwareJsonFile}\n"
-              writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
+              // echo "Start writing JSON file: ${envAwareJsonFile}\n"
+              // writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
 
               echo "Start writing JSON file: ${envResetJsonfile}\n"
               writeJSON(file: envResetJsonfile, json: jsonReset, pretty: 4)
 
-              sh 'cat xs-security-env.json'
+              // sh 'cat xs-security-env.json'
               sh 'cat xsSecurityReset.json'
+
+              error 'FORCE: Stop the job'
 
               if (jobName.endsWith('dev')) {
 
@@ -258,7 +251,6 @@ import groovy.json.*
             }
           }
         }
-      }
     }
   }
 
