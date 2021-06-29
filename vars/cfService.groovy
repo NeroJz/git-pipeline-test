@@ -13,6 +13,9 @@ def call(Closure body) {
     environment {
       jsonFileName = "${config.jsonFileName}"
       jsonResetName = 'xsSecurityReset.json'
+
+      envAwareJsonFile = "xs-security-env.json"
+			envResetJsonfile = "xsSecurityReset.json"
     }
     stages {
       stage('Checkout') {
@@ -32,9 +35,19 @@ def call(Closure body) {
             def nonEnvAwareValue = jsonContents.xsappname
             def nonEnvResetValue = jsonReset.xsappname
 
-            echo "${nonEnvAwareValue}"
-            echo "\n"
-            echo "${nonEnvResetValue}"
+            envAwareValue = nonEnvAwareValue +"-dev"
+            envResetValue = nonEnvResetValue +"-dev"
+
+            echo "Updated environment aware xsappname: ${envAwareValue}"
+            jsonContents.xsappname = envAwareValue
+            jsonReset.xsappname = envResetValue
+            writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
+            writeJSON(file: envResetJsonfile, json: jsonReset, pretty: 4)
+
+            echo "Content: xs-security-env.json\n"
+            sh 'cat xs-security-env.json'
+            echo "\nContent: xsSecurityReset.json\n"
+            sh 'cat xsSecurityReset.json'
           }
         }
       }
