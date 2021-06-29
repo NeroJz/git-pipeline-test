@@ -29,8 +29,8 @@ import groovy.json.*
         startingextDemoTag = "0.1.0-extDemo"
 
         scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
-        JENKINS_API_CRED = credentials('JENKINS_API')
-        CF_BUILD = credentials('CF_BUILD')
+        // JENKINS_API_CRED = credentials('JENKINS_API')
+        // CF_BUILD = credentials('CF_BUILD')
 
         envAwareJsonFile = "xs-security-env.json"
         envResetJsonfile = "xsSecurityReset.json"
