@@ -6,6 +6,8 @@ def call(Closure body) {
   body.delegate = config
   body()
 
+  def isSkipped = false
+
   // if(config.tenantname_dev == null) {
   //   error 'Error: tenantname_dev must be provided from Jenkins!'
   // }
@@ -39,8 +41,8 @@ def call(Closure body) {
       checkout scm
 
       if(tenantName == 'null') {
-        echo 'Tenant name is empty. Skip the rest of the pipeline.'
-        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+        isSkipped = false
+        echo 'Tenant name is empty. Skip the Checkout Stage.'
         return
       }
 
