@@ -199,6 +199,11 @@ import groovy.json.*
 
               sh "ls -l"
 
+              Jenkins.instance.pluginManager.plugins.each{
+                plugin ->
+                  println("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
+              }
+
               echo "Start writing JSON file: ${envAwareJsonFile}\n"
               writeJSON(file: envAwareJsonFile, json: jsonContents, pretty: 4)
 
