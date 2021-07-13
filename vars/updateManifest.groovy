@@ -21,11 +21,11 @@ def call(body) {
           script {
             echo "Read manifest..."
 
-            try {
-              originalManifest = readYaml file: 'manifest.yml'
-            } catch (Exception e){
-              error "Execption on reading manifest: ${e}"
-            }
+            // try {
+            //   originalManifest = readYaml file: 'manifest.yml'
+            // } catch (Exception e){
+            //   error "Execption on reading manifest: ${e}"
+            // }
 
             // sh(returnStdout: true, script: "cat ${originalManifest}")
             if(originalManifest != null) {
