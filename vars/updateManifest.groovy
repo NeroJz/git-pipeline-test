@@ -52,14 +52,14 @@ def call(body) {
               echo "Buildpack: ${buildpack}"
 
               def originalBuildPack = originalManifest.applications[0].buildpacks
-
-              echo "${originalBuildPack}"
-
               originalBuildPack = buildpack
 
-              echo "${originalBuildPack}"
+              echo "After manipulate:"
+              echo "${originalManifest}"
 
               // Step 3 - Save manifest from originalManifest
+              writeYaml file:'manifest.yml', data: originalManifest
+              
             }
           }
         }
