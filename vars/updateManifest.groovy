@@ -21,7 +21,9 @@ def call(body) {
 
             def originalManifest = readYaml file: 'manifest.yml'
 
-            sh(returnStdout: true, script: "cat ${originalManifest}")
+            // sh(returnStdout: true, script: "cat ${originalManifest}")
+
+            echo "${originalManifest}"
           }
         }
       }
