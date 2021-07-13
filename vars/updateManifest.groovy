@@ -67,8 +67,12 @@ def call(body) {
           script {
             echo "Deploying..."
 
-            sh "rm manifest.yml"
-            sh "mv manifest-bck.yml manifest.yml"
+            def exists = fileExists 'manifest-bck.yml'
+            if (exists) {
+              echo "Deleting & Reverting..."
+              sh "rm manifest.yml"
+              sh "mv manifest-bck.yml manifest.yml"
+            }
           }
         }
       }
