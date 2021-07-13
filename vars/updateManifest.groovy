@@ -51,9 +51,6 @@ def call(body) {
               def buildpack = "${env.NEWSPAGE_NODEJS_BUILDPACK}"
               echo "Buildpack: ${buildpack}"
 
-              // def originalBuildPack = originalManifest.applications[0].buildpacks
-              // originalBuildPack = buildpack
-
               originalManifest.applications[0].buildpacks = [buildpack]
 
               echo "After manipulate:"
@@ -61,8 +58,17 @@ def call(body) {
 
               // Step 3 - Save manifest from originalManifest
               writeYaml file:'manifest.yml', data: originalManifest
-
             }
+          }
+        }
+      }
+      stage("Deploy") {
+        steps {
+          script {
+            echo "Deploying..."
+
+            sh "rm manifest.yml"
+            sh "mv manifest-bck.yml manifest.yml"
           }
         }
       }
