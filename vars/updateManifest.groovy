@@ -21,11 +21,11 @@ def call(body) {
           script {
             echo "Read manifest..."
 
-            // try {
-            //   originalManifest = readYaml file: 'manifest.yml'
-            // } catch (Exception e){
-            //   error "Execption on reading manifest: ${e}"
-            // }
+            try {
+              originalManifest = readYaml file: 'manifest.yml'
+            } catch (Exception e){
+              error "Execption on reading manifest: ${e}"
+            }
 
             // sh(returnStdout: true, script: "cat ${originalManifest}")
             if(originalManifest != null) {
@@ -42,9 +42,17 @@ def call(body) {
 
             if(originalManifest != null) {
               // Step 1 - Backup original manifest
-              echo "\t\tPerform manipulation"
+              sh 'mv manifest.yml manifest-bck.yml'
+
+              echo "Before manipulate:"
+              echo "${originalManifest}"
 
               // Step 2 - Replace the buildpack from env
+              def buildpack = env.NEWSPAGE_NODEJS_BUILDPACK
+              originalManifest.buildpacks[0] = buildpack
+
+              echo "After manipulate":
+              echo "${originalManifest}"
 
               // Step 3 - Save manifest from originalManifest
             }
