@@ -51,10 +51,10 @@ def call(body) {
               def buildpack = "${env.NEWSPAGE_NODEJS_BUILDPACK}"
               echo "Buildpack: ${buildpack}"
 
-              def originalBuildPack = originalManifest.applications[0].buildpacks
-              originalBuildPack = buildpack
+              // def originalBuildPack = originalManifest.applications[0].buildpacks
+              // originalBuildPack = buildpack
 
-              originalManifest.applications[0].buildpacks = [originalBuildPack]
+              originalManifest.applications[0].buildpacks = [buildpack]
 
               echo "After manipulate:"
               echo "${originalManifest}"
