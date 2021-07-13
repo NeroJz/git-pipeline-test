@@ -54,7 +54,7 @@ def call(body) {
               def originalBuildPack = originalManifest.applications[0].buildpacks
               originalBuildPack = buildpack
 
-              originalManifest.applications[0].buildpacks = originalBuildPack
+              originalManifest.applications[0].buildpacks = [originalBuildPack]
 
               echo "After manipulate:"
               echo "${originalManifest}"
