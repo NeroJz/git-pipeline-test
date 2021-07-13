@@ -4,6 +4,8 @@ def call(body) {
   body.delegate = config
   body()
 
+  def originalManifest;
+
   pipeline {
     agent any
     stages {
@@ -19,17 +21,33 @@ def call(body) {
           script {
             echo "Read manifest..."
 
-            def originalManifest = readYaml file: 'manifest.yml'
+            try {
+              originalManifest = readYaml file: 'manifest.yml'
+            } catch (Exception e){
+              error "Execption on reading manifest: ${e}"
+            }
 
             // sh(returnStdout: true, script: "cat ${originalManifest}")
+            if(originalManifest != null) {
+              echo "${originalManifest}"
+            }
 
-            echo "${originalManifest}"
           }
         }
       }
-      stage('Update Manifest') {
+      stage('Manipulate Manifest') {
         steps {
-          echo "Update manifest..."
+          echo "Manipulate manifest..."
+
+          if(originalManifest != null) {
+            // Step 1 - Backup original manifest
+            echo "\t\tPerform manipulation"
+
+            // Step 2 - Replace the buildpack from env
+
+            // Step 3 - Save manifest from originalManifest
+          }
+
         }
       }
     }
