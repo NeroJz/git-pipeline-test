@@ -55,6 +55,10 @@ def call(body) {
 
               echo "${originalBuildPack}"
 
+              originalBuildPack = buildpack
+
+              echo "${originalBuildPack}"
+
               // Step 3 - Save manifest from originalManifest
             }
           }
