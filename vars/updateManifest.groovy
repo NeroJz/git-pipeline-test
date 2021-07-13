@@ -37,17 +37,18 @@ def call(body) {
       }
       stage('Manipulate Manifest') {
         steps {
-          echo "Manipulate manifest..."
+          script {
+            echo "Manipulate manifest..."
 
-          if(originalManifest != null) {
-            // Step 1 - Backup original manifest
-            echo "\t\tPerform manipulation"
+            if(originalManifest != null) {
+              // Step 1 - Backup original manifest
+              echo "\t\tPerform manipulation"
 
-            // Step 2 - Replace the buildpack from env
+              // Step 2 - Replace the buildpack from env
 
-            // Step 3 - Save manifest from originalManifest
+              // Step 3 - Save manifest from originalManifest
+            }
           }
-
         }
       }
     }
