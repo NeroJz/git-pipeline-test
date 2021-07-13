@@ -20,7 +20,7 @@ def call(body) {
 
           def originalManifest = readYaml file: "manifest.yml"
 
-          sh(stdout: true, script: "cat ${originalManifest}")
+          sh(returnStdout: true, script: "cat ${originalManifest}")
         }
       }
       stage('Update Manifest') {
