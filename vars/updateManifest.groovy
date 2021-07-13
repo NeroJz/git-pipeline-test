@@ -17,6 +17,10 @@ def call(body) {
       stage('Read Manifest') {
         steps {
           echo "Read manifest..."
+
+          def originalManifest = readYaml file: "manifest.yml"
+
+          sh(stdout: true, command: "cat ${originalManifest}")
         }
       }
       stage('Update Manifest') {
