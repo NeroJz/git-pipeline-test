@@ -16,11 +16,13 @@ def call(body) {
       }
       stage('Read Manifest') {
         steps {
-          echo "Read manifest..."
+          script {
+            echo "Read manifest..."
 
-          def originalManifest = readYaml file: "manifest.yml"
+            def originalManifest = readYaml file: 'manifest.yml'
 
-          sh(returnStdout: true, script: "cat ${originalManifest}")
+            sh(returnStdout: true, script: "cat ${originalManifest}")
+          }
         }
       }
       stage('Update Manifest') {
