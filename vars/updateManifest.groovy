@@ -51,13 +51,9 @@ def call(body) {
               def buildpack = "${env.NEWSPAGE_NODEJS_BUILDPACK}"
               echo "Buildpack: ${buildpack}"
 
-              originalManifest.applications[0].buildpacks = "${buildpack}"
-              writeFile file: 'manifest.yml', data: originalManifest
+              def originalBuildPack = originalManifest.applications[0].buildpacks
 
-              def manifest = readYaml 'manifest.yml'
-
-              echo "After manipulate":
-              echo "${manifest}"
+              echo "${originalBuildPack}"
 
               // Step 3 - Save manifest from originalManifest
             }
