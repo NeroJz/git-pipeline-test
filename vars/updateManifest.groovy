@@ -50,8 +50,8 @@ def call(body) {
               // Step 2 - Replace the buildpack from env
               def buildpack = "${env.NEWSPAGE_NODEJS_BUILDPACK}"
               echo "Buildpack: ${buildpack}"
-              
-              originalManifest.buildpacks[0] = buildpack
+
+              originalManifest.applications[0].buildpacks = buildpack
 
               echo "After manipulate":
               echo "${originalManifest}"
