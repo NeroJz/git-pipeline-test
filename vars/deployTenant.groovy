@@ -4,6 +4,9 @@ def call(Closure body) {
   body.delegate = config
   body()
 
+  def scmUrl = scm.getUserRemoteConfigs()[0].getUrl()
+  def appName = ""
+
   def isSkipped = false
 
   // if(config.tenantname_dev == null) {
@@ -37,6 +40,10 @@ def call(Closure body) {
   node() {
     stage('Checkout') {
       checkout scm
+
+      appName = scmUrl.substring(scmUrl.lastIndexOf('/') + 1,scmUrl.length() - 4)
+
+      echo "Appname: $appName";
 
       if(tenantName == 'null') {
         isSkipped = false
