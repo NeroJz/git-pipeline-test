@@ -63,8 +63,8 @@ def call(Closure body) {
       sh "ls -la"
     }
     stage('Copy and Replace for Each Tenant') {
-      for(String tenantName: tenants) {
-        echo "Tenant--->$tenantName"
+      for(String tenant: tenants) {
+        echo "Tenant--->$tenant"
       }
     }
     stage('Test Tenantname Based on Job Name') {
