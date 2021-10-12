@@ -54,23 +54,34 @@ def call(Closure body) {
       echo "Processing Checkout"
     }
     stage('Backup Existing App') {
-      sh "cp -r ${appName} ${appName}-bkp"
-
-      sh "cp -r ${appName}/src/tenant tenant"
-
-      sh "rm -r ${appName}/src/tenant"
-
-      sh "ls -la"
+      prepareFolderStructure()
     }
     stage('Copy and Replace for Each Tenant') {
       for(String tenant: tenants) {
-        echo "Tenant--->$tenant"
+        echo "Processing Tenant--->$tenant"
+        def tenantNameElement = "${tenant}"
+
+        def tenantNameWithoutEnv = replacedTenantName(tenantNameElement)
+
+        def existsTenant = fileExists "tenant/${tenantNameWithoutEnv}"
+
+        echo "Tenant Folder (${tenantNameElement}): ${existsTenant}"
       }
     }
     stage('Test Tenantname Based on Job Name') {
       echo "$env.JOB_NAME"
     }
   }
+}
+
+def prepareFolderStructure() {
+  sh "cp -r ${appName} ${appName}-original-bkp"
+
+  sh "cp -r ${appName}/src/tenant tenant"
+
+  sh "rm -r ${appName}/src/tenant"
+
+  sh "ls -la"
 }
 
 
