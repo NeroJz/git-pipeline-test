@@ -8,6 +8,6 @@ def processTenantFromFolder(String appName, String replacedTenantFolderName, Str
   //sh "cp -Rv ${tenantName}/* ${appName}"
   pwd = sh(returnStdout:true,script : 'pwd').replaceAll("[\\n ]", "")
   dir (replacedTenantFolderName) {
-    sh 'ls l'
+    sh 'ls -la'
   }
 }
