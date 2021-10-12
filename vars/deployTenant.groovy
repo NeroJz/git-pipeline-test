@@ -73,7 +73,7 @@ def call(Closure body) {
         if(existsTenant && tenantNameWithoutEnv == 'kara') {
           echo "Processing Copy and Replace..."
           try {
-            def replacedTenantFolderName = "tenant/${tenantNameWithoutEnv}"
+            def replacedTenantFolderName = "/tenant/${tenantNameWithoutEnv}"
             multiTenant.processTenantFromFolder(appName, replacedTenantFolderName, tenantNameElement)
           } catch (Exception ex) {
             error "Processing Copy and Replace For tenant failed: ${tenantNameElement}"
