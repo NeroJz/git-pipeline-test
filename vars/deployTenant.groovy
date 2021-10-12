@@ -57,6 +57,9 @@ def call(Closure body) {
       prepareFolderStructure(appName)
     }
     stage('Copy and Replace for Each Tenant') {
+
+      def multiTenant = new com.accenture.newspage.MultiTenant()
+
       for(String tenant: tenants) {
         echo "Processing Tenant--->$tenant"
         def tenantNameElement = "${tenant}"
@@ -66,6 +69,18 @@ def call(Closure body) {
         def existsTenant = fileExists "tenant/${tenantNameWithoutEnv}"
 
         echo "Tenant Folder (${tenantNameElement}): ${existsTenant}"
+
+        if(existsTenant && tenantNameWithoutEnv == 'kara') {
+          echo "Processing Copy and Replace..."
+          try {
+            def replacedTenantFolderName = "tenant/${tenantNameWithoutEnv}"
+            multiTenant.processTenantFromFolder(appName, replacedTenantFolderName, tenantNameElement)
+          } catch (Exception ex) {
+            error "Processing Copy and Replace For tenant failed: ${tenantNameElement}"
+          }
+        } else {
+          echo "Perform normal process"
+        }
       }
     }
     stage('Test Tenantname Based on Job Name') {
