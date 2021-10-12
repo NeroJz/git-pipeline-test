@@ -53,68 +53,21 @@ def call(Closure body) {
 
       echo "Processing Checkout"
     }
-    stage('Step 2') {
-      if(tenantName == 'null') {
-        echo 'Step 2 Tenant name is empty. Skip the rest of the pipeline.'
-        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-        return
-      }
+    stage('Backup Existing App') {
+      sh "cp -r ${appName} ${appName}-bkp"
 
-      echo "Processing Step 2"
+      sh "cp -r ${appName}/src/tenant tenant"
+
+      sh "rm -r ${appName}/src/tenant"
+
+      sh "ls -la"
     }
-    stage('Step 3') {
-      if(tenantName == 'null') {
-        echo 'Step 3 Tenant name is empty. Skip the rest of the pipeline.'
-        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
-        return
-      }
-
-      echo "Processing Step 3"
+    stage('Copy tenants and ') {
+      
     }
     stage('Test Tenantname Based on Job Name') {
       echo "$env.JOB_NAME"
     }
-    // stage('Test Directory') {
-    //   stdout = sh(returnStdout: true, script: "ls -l")
-    //   echo "${stdout.trim()}"
-
-    //   for(String tenant : tenants) {
-    //     String tenantElement = "${tenant}"
-    //     echo "Starting Process for Tenant: ${tenantElement}"
-
-    //     def replacedTenant = getReplacedTenantName(tenantElement)
-
-    //     echo "\tgetReplacedTenantName ---> ${replacedTenant}"
-
-    //     def exists = fileExists replacedTenant
-
-    //     echo "\tFile ${tenantElement}: ${exists.toString()}"
-
-    //   }
-    // }
-    // stage('Patch') {
-    //   withCredentials([usernamePassword(credentialsId: 'PRTG_CREDENTIAL', 
-    //     usernameVariable: 'PRTG_USR', 
-    //     passwordVariable: 'PRTG_PWD')]) {
-    //     // echo PRTG_USR
-    //     // echo PRTG_PWD
-
-    //     for(String tenant : tenants) {
-    //       def data = '{"prtg.user":"' + PRTG_USR + '","prtg.password":"' + PRTG_PWD +'", "tenant":"'+ tenant.trim() +'"}'
-    //       def command = 'curl -d \''+ data + '\' -H "Content-Type: application/json" -X POST http://host.docker.internal:5000/api/service/hello'
-
-    //       echo command
-          
-    //       def stdout = sh(returnStdout: true, script: command)
-
-    //       def jsonObj = new JsonSlurperClassic().parseText(stdout.trim())
-
-    //       echo "${jsonObj.status}"
-
-    //       echo "${stdout.trim()}"
-    //     }
-    //   }
-    // }
   }
 }
 
@@ -123,4 +76,9 @@ def getReplacedTenantName(String tenant) {
   def replacedTenant = tenant.trim().replaceAll(/(-dev|-intg)/, "")
 
   return replacedTenant
+}
+
+
+def getAllFileCommand() {
+  return $/ find . -maxdepth 5 -type f -not -path '*/.*' | sort /$
 }
