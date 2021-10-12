@@ -11,7 +11,7 @@ def processTenantFromFolder(String appName, String replacedTenantFolderName, Str
     echo "\t${tenantNameElement} found. Running within ${pwd}"
 
     /* Hide for temporary */
-    command =  $/ find . -maxdepth 5 -type f -not -path '*/.*' | sort /$ 
+    command =  $/ find ./tenant/ -maxdepth 5 -type f -not -path '*/.*' | sort /$ 
     
     listFiles = sh(returnStdout:true, script: command)
     echo listFiles
