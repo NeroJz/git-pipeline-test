@@ -80,5 +80,5 @@ def getReplacedTenantName(String tenant) {
 
 
 def getAllFileCommand() {
-  return $/ find . -maxdepth 5 -type f -not -path '*/.*' | sort /$
+  // return $/ find . -maxdepth 5 -type f -not -path */.* | sort /$
 }
