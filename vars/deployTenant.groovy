@@ -62,8 +62,10 @@ def call(Closure body) {
 
       sh "ls -la"
     }
-    stage('Copy tenants and ') {
-      
+    stage('Copy and Replace for Each Tenant') {
+      for(String tenantName: tenants) {
+        echo "Tenant--->$tenantName"
+      }
     }
     stage('Test Tenantname Based on Job Name') {
       echo "$env.JOB_NAME"
@@ -72,7 +74,12 @@ def call(Closure body) {
 }
 
 
-def getReplacedTenantName(String tenant) {
+def replacedTenantName(String tenant) {
+  /*
+    The function remove -dev or -intg from the
+    tenant using regular expression
+  */
+
   def replacedTenant = tenant.trim().replaceAll(/(-dev|-intg)/, "")
 
   return replacedTenant
