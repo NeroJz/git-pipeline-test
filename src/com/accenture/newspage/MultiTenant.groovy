@@ -26,7 +26,7 @@ def processTenantFromFolder(String appName, String replacedTenantFolderName, Str
 
         // Test Copy
         fileName = listArray[i].substring(listArray[i].lastIndexOf('/') + 1).replaceAll("[\\n ]", "")
-        path = "../${appName}/${path}"
+        path = "../${appName}/src/${path}"
         exists = sh (returnStatus:true, script: "find ${path} -name $fileName | grep .")
         if ( exists != 0 ){
           sh (returnStdout:true, script: "cp ${listArray[i]} ${path}")
