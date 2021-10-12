@@ -54,7 +54,7 @@ def call(Closure body) {
       echo "Processing Checkout"
     }
     stage('Backup Existing App') {
-      prepareFolderStructure()
+      prepareFolderStructure(appName)
     }
     stage('Copy and Replace for Each Tenant') {
       for(String tenant: tenants) {
@@ -74,7 +74,7 @@ def call(Closure body) {
   }
 }
 
-def prepareFolderStructure() {
+def prepareFolderStructure(String appName) {
   sh "cp -r ${appName} ${appName}-original-bkp"
 
   sh "cp -r ${appName}/src/tenant tenant"
