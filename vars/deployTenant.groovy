@@ -70,7 +70,7 @@ def call(Closure body) {
 
         echo "Tenant Folder (${tenantNameElement}): ${existsTenant}"
 
-        if(existsTenant && tenantNameWithoutEnv == 'kara2') {
+        if(existsTenant && tenantNameWithoutEnv == 'kara') {
           echo "Processing Copy and Replace..."
           try {
             multiTenant.processTenantFromFolder(appName, "tenant/${tenantNameWithoutEnv}", tenantNameWithoutEnv)
