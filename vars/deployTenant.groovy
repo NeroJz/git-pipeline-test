@@ -58,7 +58,7 @@ def call(Closure body) {
     }
     stage('Copy and Replace for Each Tenant') {
 
-      def multiTenant = new com.accenture.newspage.MultiTenant()
+      // def multiTenant = new com.accenture.newspage.MultiTenant()
 
       for(String tenant: tenants) {
         echo "Processing Tenant--->$tenant"
