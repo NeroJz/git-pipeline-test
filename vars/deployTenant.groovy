@@ -74,7 +74,7 @@ def call(Closure body) {
           echo "Processing Copy and Replace..."
           try {
             dir("tenant/${tenantNameWithoutEnv}") {
-              sh 'ls -la'
+              sh 'ls -lR'
             }
           } catch (Exception ex) {
             error "Processing Copy and Replace For tenant failed: ${tenantNameElement}"
