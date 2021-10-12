@@ -58,7 +58,7 @@ def call(Closure body) {
     }
     stage('Copy and Replace for Each Tenant') {
 
-      // def multiTenant = new com.accenture.newspage.MultiTenant()
+      def multiTenant = new com.accenture.newspage.MultiTenant()
 
       for(String tenant: tenants) {
         echo "Processing Tenant--->$tenant"
@@ -73,9 +73,7 @@ def call(Closure body) {
         if(existsTenant && tenantNameWithoutEnv == 'kara') {
           echo "Processing Copy and Replace..."
           try {
-            dir("tenant/${tenantNameWithoutEnv}") {
-              sh 'ls -lR'
-            }
+            multiTenant.processTenantFromFolder(appName, "tenant/${tenantNameWithoutEnv}", tenantNameWithoutEnv)
           } catch (Exception ex) {
             error "Processing Copy and Replace For tenant failed: ${tenantNameElement}"
           }
